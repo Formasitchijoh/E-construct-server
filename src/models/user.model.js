@@ -90,6 +90,19 @@ const updateUserToken = ( email, refreshToken) =>{
     })
 }
 
+const findUserToken = (refreshToken) =>{
+    return new Promise((resolve, reject) =>{
+        dbConn.query(`SELECT * FROM user WHERE refreshToken = ?`, refreshToken, (err, res) =>{
+            if(err){
+                console.log("error", err);
+                reject(err)
+            }else{
+                resolve(res)
+            }
+        })
+    })
+}
+
 const removeUserById = (id, result) =>{
     dbConn.query("DELETE FROM user user_id=?",
      [id], (err, res) =>{
@@ -101,4 +114,4 @@ const removeUserById = (id, result) =>{
         }
      })
 } 
-module.exports = {createAllUser,updateUserToken, createUser, findUserByEmail, findAllUsers, findUserbyId, updateUserById,removeUserById}
+module.exports = {createAllUser,updateUserToken, createUser, findUserByEmail, findAllUsers, findUserToken, findUserbyId, updateUserById,removeUserById}

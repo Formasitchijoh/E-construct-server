@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 
 
 const verifyJwt = ( req, res, next) =>{
-    console.log(`vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n`, req);
     const authHeader = req.headers.authorization || req.headers.Authorization
     console.log("value of the header\n", { authHeader});
 
@@ -16,7 +15,6 @@ const verifyJwt = ( req, res, next) =>{
         (err, decoded) =>{
             if(err) return res.sendStatus(403); //invalid token
             req.user = decoded.Username;
-
             next()
         }
     )
